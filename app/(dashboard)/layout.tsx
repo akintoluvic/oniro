@@ -12,10 +12,11 @@ const DashboardLayout = ({
     <main className="h-full">
       <Sidebar />
       <div className="pl-[60px] h-full">
-        <OrgSidebar />
         <div className="flex gap-x-3 h-full">
-          {/* Add Navbar */}
-          {children}
+          <OrgSidebar />
+          <div className="h-full">
+            {children}
+          </div>
         </div>
       </div>
     </main>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Hint } from "@/components/hint";
 import { cn } from "@/lib/utils";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 import Image from "next/image";
@@ -24,6 +25,12 @@ export const Item = ({ id, name, imageUrl }: itemsProps) => {
 
   return (
     <div className="aspect-square relative">
+      <Hint
+        label={name}
+        side="right"
+        align="start"
+        sideOffset={18}
+      >
       <Image
         fill
         alt={name}
@@ -34,6 +41,7 @@ export const Item = ({ id, name, imageUrl }: itemsProps) => {
           isActive && "opacity-100"
         )}
       />
+      </Hint>
     </div>
   );
 };

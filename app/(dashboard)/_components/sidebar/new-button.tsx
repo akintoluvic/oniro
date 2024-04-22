@@ -1,5 +1,6 @@
 "use client"
 
+import { Hint } from "@/components/hint";
 import { 
   Dialog,
   DialogContent,
@@ -13,9 +14,12 @@ export const NewButton = () => {
     <Dialog>
       <DialogTrigger asChild>
         <div className="aspect-dquare">
-          <button className="bg-white/25 h-full w-full rounded-md flex items-center opacity-80 hover:opacity-100 transition">
-            <Plus className="text-white" />
-          </button>
+          <Hint side="right" align="start" label="create organization" >
+            {/* Video Stopped at 1:32:54 */}
+            <button className="bg-white/25 h-full w-full rounded-md flex items-center opacity-80 hover:opacity-100 transition">
+              <Plus className="text-white" />
+            </button>
+          </Hint>
         </div>
       </DialogTrigger>
       <DialogContent className="p-0 bg-transparent border-none max-w-[480px]">

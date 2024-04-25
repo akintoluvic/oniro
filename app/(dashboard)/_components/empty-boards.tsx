@@ -1,8 +1,24 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
+import { api } from "@/convex/_generated/api";
+import { useOrganization } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
 import Image from "next/image";
 
-
 export const EmptyBoards = () => {
+  const { organization } = useOrganization()
+  const create = useMutation(api.board.create)
+
+  const onClick = () => {
+    if(!organization) return
+
+    create({
+      orgId: organization?.id,
+      title: 'Untitled'
+    })
+  }
+
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <Image
@@ -16,7 +32,7 @@ export const EmptyBoards = () => {
         Start by creating a board
       </p>
       <div className="mt-6">
-        <Button size='lg'>
+        <Button size='lg' onClick={onClick}>
           Create board
         </Button>
       </div>

@@ -2,18 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
+import { useApiMutation } from "@/hooks/use-api-mutation";
 import { useOrganization } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 import Image from "next/image";
 
 export const EmptyBoards = () => {
   const { organization } = useOrganization()
-  const create = useMutation(api.board.create)
+  const { pending, mutate } = useApiMutation(api.board.create)
 
   const onClick = () => {
     if(!organization) return
 
-    create({
+    mutate({
       orgId: organization?.id,
       title: 'Untitled'
     })
@@ -32,7 +33,7 @@ export const EmptyBoards = () => {
         Start by creating a board
       </p>
       <div className="mt-6">
-        <Button size='lg' onClick={onClick}>
+        <Button size='lg' disabled={pending} onClick={onClick}>
           Create board
         </Button>
       </div>

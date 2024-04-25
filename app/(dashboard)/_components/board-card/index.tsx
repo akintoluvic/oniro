@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { Overlay } from "./overlay"
 
 interface BoardCardProps {
   id: string
@@ -34,6 +35,7 @@ export const BoardCard = ({
             fill
             className="object-fit"
           />
+          <Overlay />
         </div>
       </div>
     </Link>

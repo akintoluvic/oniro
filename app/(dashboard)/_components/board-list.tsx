@@ -6,6 +6,7 @@ import { EmptyFavorites } from "./empty-favorites"
 import { EmptySearch } from "./empty-search"
 import { api } from "@/convex/_generated/api"
 import { BoardCard } from "./board-card"
+import { NewBoardButton } from "./new-board-button"
 
 interface BoardListProps {
   orgId: string
@@ -51,6 +52,7 @@ export const BoardList = ({
         {query.favorites ? 'Favorite boards' : 'Team boards'}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt8 pb-10">
+        <NewBoardButton orgId={orgId}/>
         {data?.map(board => (
           <BoardCard
             key={board._id}

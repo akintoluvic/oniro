@@ -15,6 +15,7 @@ export const ModalProvider = () => {
   if(!isMounted) return null
   
   return (
+    // You can add as many modals as needed 😀
     <>
       <RenameModal />
     </>

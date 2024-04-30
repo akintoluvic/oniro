@@ -12,8 +12,6 @@ import { MoreHorizontal } from "lucide-react"
 import { useApiMutation } from "@/hooks/use-api-mutation"
 import { api } from "@/convex/_generated/api"
 import { toast } from "sonner"
-import { useMutation } from "convex/react"
-import { Id } from "@/convex/_generated/dataModel"
 
 interface BoardCardProps {
   id: string
@@ -42,8 +40,10 @@ export const BoardCard = ({
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true
   })
-
-  const handleFavorite = useMutation(api.board.favorite)
+  const { 
+    mutate: onFavorite, 
+    pending: pendingFavorite 
+  } = useApiMutation(api.board.favorite)
 
   const { 
     mutate: onUnfavorite, 
@@ -55,7 +55,7 @@ export const BoardCard = ({
       onUnfavorite({ id })
         .catch(() => toast.error('Failed to unfavorite'))
     } else {
-      handleFavorite({ id: id as Id<'boards'>, orgId })
+      onFavorite({ id, orgId })
       .catch(() => toast.error('Failed to favorite'))
     }
   }
@@ -91,7 +91,7 @@ export const BoardCard = ({
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
           onClick={toggleFavorite}
-          disabled={ pendingUnfavorite }
+          disabled={ pendingFavorite || pendingUnfavorite }
         />
       </div>
     </Link>

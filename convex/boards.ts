@@ -1,16 +1,45 @@
 import { v } from "convex/values";
 import { query } from "./_generated/server";
+import { getAllOrThrow } from "convex-helpers/server/relationships";
+import { Id } from "./_generated/dataModel";
 
 export const get = query({
   args: {
     orgId: v.string(),
-    search: v.optional(v.string())
+    search: v.optional(v.string()),
+    favorites: v.optional(v.string())
   },
   handler: async(ctx, args) => {
     const identity = await ctx.auth.getUserIdentity()
 
     if(!identity) {
       throw new Error('Unauthorised')
+    }
+
+    if(args.favorites) {
+      
+      const favoritedBoards = await ctx.db
+        .query('userFavorites')
+        .withIndex('by_user_org', q => 
+          q
+            .eq('userId', identity.subject)
+            .eq('orgId', args.orgId)
+        )
+        .order('desc')
+        .collect()
+
+      // TODO: fix ts error here
+      // @ts-ignore
+      const ids: Id<'boards'>[] = favoritedBoards.map(board => board.boardId)
+
+      const boards = await getAllOrThrow(ctx.db, ids)
+
+      console.log(boards)
+
+      return boards.map(board => ({
+        ...board,
+        isFavorite: true,
+      }))
     }
 
     const title = args.search as string

@@ -18,10 +18,6 @@ export async function POST(request: Request) {
   const authorization = await auth()
   const user = await currentUser()
 
-  console.log(
-    'Auth info',authorization, user
-  )
-
   if(!authorization || !user) {
     return new Response('Unauthorised', { status: 403 })
   }

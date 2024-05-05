@@ -66,13 +66,15 @@ export const Info = ({
         </Button>
       </Hint>
       <TabSeparator />
-      <Button
-        variant="board" 
-        onClick={() =>onOpen(data._id, data.title)}
-        className="text-base font-normal px-2"
-      >
-        {data.title}
-      </Button>
+      <Hint label="Edit board title" side="bottom" sideOffset={10}>
+        <Button
+          variant="board" 
+          onClick={() =>onOpen(data._id, data.title)}
+          className="text-base font-normal px-2"
+        >
+          {data.title}
+        </Button>
+      </Hint>
     </div>
   )
 }

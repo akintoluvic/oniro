@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import { cn } from "@/lib/utils"
+import { useRenameModal } from "@/store/use-rename-modal"
 import { useQuery } from "convex/react"
 import { Poppins } from "next/font/google"
 import Image from "next/image"
@@ -30,6 +31,8 @@ const TabSeparator = () => {
 export const Info = ({
   boardId
 }: InfoProps) => {
+
+  const { onOpen } = useRenameModal()
 
   const data = useQuery(api.board.get, {
     id: boardId as Id<'boards'>
@@ -63,7 +66,11 @@ export const Info = ({
         </Button>
       </Hint>
       <TabSeparator />
-      <Button variant="board" className="text-base font-normal px-2">
+      <Button
+        variant="board" 
+        onClick={() =>onOpen(data._id, data.title)}
+        className="text-base font-normal px-2"
+      >
         {data.title}
       </Button>
     </div>

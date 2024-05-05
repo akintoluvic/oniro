@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { useQuery } from "convex/react"
 import { Poppins } from "next/font/google"
 import Image from "next/image"
+import Link from "next/link"
 
 interface InfoProps {
   boardId: string
@@ -34,18 +35,20 @@ export const Info = ({
       className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md"
     >
       <Button variant='board' className="px-2">
-        <Image
-          src='/logo.svg'
-          alt="Board logo"
-          height={40}
-          width={40}
-        />
-        <span className={cn(
-          "font-semibold text-xl ml-2 text-black",
-          font.className
-        )}>
-          Board
-        </span>
+        <Link href="/">
+          <Image
+            src='/logo.svg'
+            alt="Board logo"
+            height={40}
+            width={40}
+          />
+          <span className={cn(
+            "font-semibold text-xl ml-2 text-black",
+            font.className
+          )}>
+            Board
+          </span>
+        </Link>
       </Button>
     </div>
   )

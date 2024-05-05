@@ -1,5 +1,6 @@
 'use client'
 
+import { Hint } from "@/components/hint"
 import { Button } from "@/components/ui/button"
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
@@ -34,22 +35,25 @@ export const Info = ({
     <div
       className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md"
     >
-      <Button variant='board' className="px-2">
-        <Link href="/">
-          <Image
-            src='/logo.svg'
-            alt="Board logo"
-            height={40}
-            width={40}
-          />
-          <span className={cn(
-            "font-semibold text-xl ml-2 text-black",
-            font.className
-          )}>
-            Board
-          </span>
-        </Link>
-      </Button>
+      <Hint label="Go to boards">
+        <Button variant='board' className="px-2">
+          <Link href="/" className="flex items-center">
+            <Image
+              src='/logo.svg'
+              alt="Board logo"
+              height={30}
+              width={30}
+              
+            />
+            <span className={cn(
+              "font-semibold text-xl ml-2 text-black",
+              font.className
+            )}>
+              Board
+            </span>
+          </Link>
+        </Button>
+      </Hint>
     </div>
   )
 }

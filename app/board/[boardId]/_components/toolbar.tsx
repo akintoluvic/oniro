@@ -67,13 +67,13 @@ export const Toolbar = ({
       <ToolButton
           label="Undo" 
           icon={Undo2} 
-          onClick={() => {}} 
+          onClick={undo} 
           isDiabled={!canUndo}
         />
         <ToolButton
           label="Redo" 
           icon={Redo2} 
-          onClick={() => {}} 
+          onClick={redo} 
           isDiabled={!canRedo}
         />
       </div>
